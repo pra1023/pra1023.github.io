@@ -1,18 +1,19 @@
+<html>
 <head>
-    <meta name =viewpoint center="width = device-width, initial-scale=1.0"/>
+    <meta name=viewport content="width=device-width, initial-scale=1.0" />
 </head>
-
 <body>
 <center>
-<button onclick="show()">꾹</button>
+<button onclick="show()">꾹~</button>
 </center>
 <script>
-function showData() {
-    document.write(new Data())
+function showDate() {
+    document.write(new Date() + "<br>")
 }
-
 function show() {
-    setInterval(showData, 1000)
+   //setTimeout(showDate, 3000)
+   setInterval(showDate, 1000)
 }
 </script>
 </body>
+</html>
