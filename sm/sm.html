@@ -1,0 +1,109 @@
+<html>
+<head>
+<style>
+<input {height: 50px, font
+.a { width : 30% }
+.b { height : 100px }
+</style>
+</head>
+<body>
+<center>
+<h1>슬롯머신</h1>
+<img src="7.gif" id="first" width="30%">
+<img src="7.gif" id="second" width="30%">
+<img src="7.gif" id="third" width="30%">
+<form>
+<input type="button" value="STOP" class="a" onclick="end(1)">
+<input type="button" value="STOP" class="a" onclick="end(2)">
+<input type="button" value="STOP" class="a" onclick="end(3)"><br>
+<input type="button" value="START" onClick="startGame()" class="b">
+<input type="button" value="ALLSTOP" onclick="allend()" class="b">
+
+<input type="checkbox" id="sori" style="height:20">
+<label>조용히</label> 
+<input type="text" id="result" size = 8 style="height:45">
+</form>
+</center>
+<script>
+game = false
+box1 = false
+box2 = false
+box3 = false
+tid = 0
+IMG = new Array();
+IMG[0] = new Image(); IMG[0].src="0.gif"
+IMG[1] = new Image(); IMG[1].src="1.gif"
+IMG[2] = new Image(); IMG[2].src="2.gif"
+IMG[3] = new Image(); IMG[3].src="3.gif"
+IMG[4] = new Image(); IMG[4].src="4.gif"
+IMG[5] = new Image(); IMG[5].src="5.gif"
+IMG[6] = new Image(); IMG[6].src="6.gif"
+IMG[7] = new Image(); IMG[7].src="7.gif"
+IMG[8] = new Image(); IMG[8].src="8.gif"
+IMG[9] = new Image(); IMG[9].src="9.gif"
+
+audio1 = new Audio("slotmachine.wav")
+audio2 = new Audio("dingdong.wav")
+audio3 = new Audio("fsigh.wav")
+
+function playAudio(){
+	if ( eval("sori").checked ) {
+		audio.pause()
+		return
+	}
+	audio1.play()
+}
+function result(){
+	if  (document.images["first"].src == document.images["second"].src &&
+		document.images["second"].src == document.images[third].src) {
+		document.getElementById("result").value = "축하합니다"
+	}
+	else {
+		document.getElementById("result").value = "다음기회에"
+	}
+}
+function runrunrun() {
+	num = Math.floor(Math.random() * 10)
+	if ( box1 ) document.images["first"].src = IMG[num].src
+	num = Math.floor(Math.random() * 10)
+	if ( box2 ) document.images["second"].src = IMG[num].src
+	num = Math.floor(Math.random() * 10)
+	if ( box3 ) document.images["third"].src = IMG[num].src
+	setTimeout("runrunrun()", 100)
+	tid = setTimeout("runrunrun()", 100)
+	playAudio()
+	tid = setTimeout("runrunrun()",100)
+}
+function allend() {
+	if (game == true) {
+		end(1); end(2); end(3);
+		game = false
+	}
+	audio1.pause()
+	result()
+} 
+function end(num) {
+	if ( game == true ){
+		if ( num == 1 ) box1 = false
+		if ( num == 2 ) box2 = false
+		if ( num == 3 ) box3 = false
+	}
+	if( !box1 && !box2 && !box3 ) {
+		audio1.pause()
+		result()
+		game = false
+	}
+}
+function startGame() {
+	//alert("시작")
+	if (game == true )
+		return
+	game = true
+	box1 = true
+	box2 = true
+	box3 = true
+	runrunrun()
+}
+</script>
+</body>
+</html>
