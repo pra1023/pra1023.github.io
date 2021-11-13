@@ -1,15 +1,29 @@
 <html>
 <head>
-<meta name =viewpoint center="width = device-width, initial-scale=1.0"/>
+   <meta name=viewport content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<center><h1>최댓값 구하기</h1></center>
+<center><h1>숫자 정렬</h1></center>
 <script>
-num  = prompt("숫자:")
+var num = prompt("숫자 입력")
+//alert("입력값:" + num)
+document.write("<center><h1>")
 document.write(num + "<br>")
-val = num.split(" ")
-document.write(val+"<br>")
-document.write("배열 길이:" + val.length + "<br>")
+val = num.split(' ')
+document.write(val + "<br>")
+document.write("배열 길이 : " + val.length +  "<br>")
+data = val.map(Number)
+for ( k=0 ; k<(data.length-1) ; k++ ) {
+   for ( i = 0 ; i<(data.length-1) ; i++ ) {
+      if ( data[i] > data[i+1] ) {
+         tmp = data[i]
+         data[i] = data[i+1]
+         data[i+1] = tmp
+      }
+   }
+  document.write(k + "번째 정렬 후 : " + data + "<br>")
+}
+document.write("최종 정렬 후 : " + data)
+document.write("</h1></center>")
 </script>
-</body>
-</html>
+</body></html>
